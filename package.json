@@ -1,0 +1,28 @@
+{
+  "name": "implementation-guide-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@contentstack/delivery-sdk": "^4.3.0",
+    "@contentstack/live-preview-utils": "^2.0.4",
+    "next": "14.2.14",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "@types/react": "^18.3.7",
+    "@types/react-dom": "^18.3.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "14.2.12",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.12",
+    "typescript": "^5.6.2"
+  }
+}
