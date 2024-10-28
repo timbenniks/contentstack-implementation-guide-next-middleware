@@ -6,7 +6,7 @@ This example covers the following items:
 - SDK initialization
 - live preview setup
 
-> This example has Contentstack Live preview set up with a middleware/proxy server in between. This in between server doe snot use the Contentsteck delivery SDK but uses the API directly. Live preview is set up with SSR mode true. Which means Contentstack adds query parameters to the URL which we grab in the code and give to the delivery API including the live_preview token. Contentstack refreshes the browser on content edit each time.
+> This example has Contentstack Live preview set up with a middleware/proxy server in between. This in between server does not use the Contentsteck delivery SDK but uses the API directly. Live preview is set up with SSR mode true. Which means Contentstack adds query parameters to the URL which we grab in the code and give to the delivery API including the live_preview token. Contentstack refreshes the browser on content edit each time.
 
 ## How to get started
 

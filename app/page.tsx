@@ -16,6 +16,7 @@ export default function Home() {
 
   const getContent = async () => {
     const result = await fetch(
+      // this could be any external URL
       `/api/middleware?content_type_uid=${content_type_uid}&entry_uid=${entry_uid}&live_preview=${live_preview}`
     );
 
