@@ -1,6 +1,6 @@
 {
   "name": "contentstack-implementation-guide-next-middleware",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "repository": {
     "type": "git",
@@ -24,7 +24,7 @@
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^22.8.1",
+    "@types/node": "^22.8.4",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "eslint": "^8.57.1",

@@ -11,11 +11,15 @@ export async function GET(request: Request) {
   headers.append("Content-Type", "application/json");
   headers.append("api_key", process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string);
   headers.append("access_token", process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN as string);
-
   headers.append("preview_token", process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_TOKEN as string);
-  headers.append("live_preview", live_preview as string);
 
-  const hostname = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? "eu-rest-preview.contentstack.com" : "rest-preview.contentstack.com";
+  let hostname = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? "eu-cdn.contentstack.com" : "cdn.contentstack.com";
+
+  if (live_preview) {
+    headers.append("live_preview", live_preview as string);
+    hostname = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? "eu-rest-preview.contentstack.com" : "rest-preview.contentstack.com";
+  }
+
   const environment = process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string;
   const url = `https://${hostname}/v3/content_types/${content_type_uid}/entries/${entry_uid}?environment=${environment}`
 
