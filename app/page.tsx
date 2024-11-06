@@ -30,7 +30,7 @@ export default function Home() {
     ContentstackLivePreview.init({
       ssr: true,
       enable: true,
-
+      mode: "builder",
       stackDetails: {
         apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string,
         environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
@@ -99,7 +99,10 @@ export default function Home() {
           />
         ) : null}
 
-        <div className="space-y-8 max-w-screen-sm mt-4">
+        <div
+          className="space-y-8 max-w-screen-sm mt-4"
+          {...(page?.$ && page?.$.blocks)}
+        >
           {page?.blocks?.map((item, index) => {
             const { block } = item;
             const isImageLeft = block.layout === "image_left";
