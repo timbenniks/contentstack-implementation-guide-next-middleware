@@ -1,53 +1,35 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { headers } from "next/headers";
 import { Page } from "@/lib/types";
-import { useSearchParams } from "next/navigation";
-import ContentstackLivePreview from "@contentstack/live-preview-utils";
 
-export default function Home() {
-  const searchParams = useSearchParams();
-  const live_preview = searchParams.get("live_preview");
-  const content_type_uid = searchParams.get("content_type_uid") || "page";
-  const entry_uid = searchParams.get("entry_uid") || "blte55cf3411ecaee0e";
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<any>;
+}) {
+  await headers();
+  let { live_preview, entry_uid, content_type_uid } = await searchParams;
 
-  const [page, setPage] = useState<Page>();
+  if (!entry_uid) {
+    entry_uid = "blte55cf3411ecaee0e";
+  }
+
+  if (!content_type_uid) {
+    content_type_uid = "page";
+  }
 
   const getContent = async () => {
     const result = await fetch(
       // This could be any external URL
       live_preview
-        ? `/api/middleware?content_type_uid=${content_type_uid}&entry_uid=${entry_uid}&live_preview=${live_preview}`
-        : `/api/middleware?content_type_uid=${content_type_uid}&entry_uid=${entry_uid}`
+        ? `http://localhost:3000/api/middleware?content_type_uid=${content_type_uid}&entry_uid=${entry_uid}&live_preview=${live_preview}`
+        : `http://localhost:3000/api/middleware?content_type_uid=${content_type_uid}&entry_uid=${entry_uid}`
     );
 
-    const page = await result.json();
-    setPage(page);
+    return await result.json();
   };
 
-  useEffect(() => {
-    ContentstackLivePreview.init({
-      ssr: true,
-      enable: true,
-      mode: "builder",
-      stackDetails: {
-        apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string,
-        environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
-      },
-      clientUrlParams: {
-        host:
-          process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === "EU"
-            ? "eu-app.contentstack.com"
-            : "app.contentstack.com",
-      },
-      editButton: {
-        enable: true,
-      },
-    });
-
-    getContent();
-  }, []);
+  const page: Page = await getContent();
 
   return (
     <main className="max-w-screen-md mx-auto">
