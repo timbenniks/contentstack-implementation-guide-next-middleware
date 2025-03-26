@@ -1,6 +1,6 @@
 {
   "name": "contentstack-implementation-guide-next-middleware",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": false,
   "repository": {
     "type": "git",
@@ -17,20 +17,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@contentstack/delivery-sdk": "^4.4.5",
-    "@contentstack/live-preview-utils": "^3.1.0",
-    "next": "^15.1.5",
+    "@contentstack/delivery-sdk": "^4.6.1",
+    "@contentstack/live-preview-utils": "^3.1.2",
+    "@tailwindcss/postcss": "^4.0.17",
+    "@timbenniks/contentstack-endpoints": "^1.0.8",
+    "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@types/node": "^22.10.7",
-    "@types/react": "^19.0.7",
-    "@types/react-dom": "^19.0.3",
-    "eslint": "^9.18.0",
-    "eslint-config-next": "^15.1.5",
-    "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17",
-    "typescript": "^5.7.3"
+    "@types/node": "^22.13.13",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.23.0",
+    "eslint-config-next": "^15.2.4",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.17",
+    "typescript": "^5.8.2"
   }
 }

@@ -1,5 +1,6 @@
 import contentstack from "@contentstack/delivery-sdk";
 import { NextResponse } from "next/server"
+import { getContentstackEndpoints, getRegionForString } from "@timbenniks/contentstack-endpoints";
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
@@ -7,17 +8,18 @@ export async function GET(request: Request) {
   const entry_uid = searchParams.get("entry_uid")
   const live_preview = searchParams.get("live_preview")
 
+  const region = getRegionForString(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as string);
+  const endpoints = getContentstackEndpoints(region, true)
+  const hostname = live_preview ? endpoints.preview : endpoints.contentDelivery
+
   const headers = new Headers();
   headers.append("Content-Type", "application/json");
   headers.append("api_key", process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY as string);
   headers.append("access_token", process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN as string);
-  headers.append("preview_token", process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_TOKEN as string);
-
-  let hostname = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? "eu-cdn.contentstack.com" : "cdn.contentstack.com";
 
   if (live_preview) {
     headers.append("live_preview", live_preview as string);
-    hostname = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'EU' ? "eu-rest-preview.contentstack.com" : "rest-preview.contentstack.com";
+    headers.append("preview_token", process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW_TOKEN as string);
   }
 
   const environment = process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string;
@@ -31,7 +33,7 @@ export async function GET(request: Request) {
   const result = await res.json();
   const { entry } = result
 
-  if (process.env.NEXT_PUBLIC_CONTENTSTACK_EDITABLE_TAGS) {
+  if (process.env.NEXT_PUBLIC_CONTENTSTACK_PREVIEW) {
     contentstack.Utils.addEditableTags(entry, 'page', true);
   }
 

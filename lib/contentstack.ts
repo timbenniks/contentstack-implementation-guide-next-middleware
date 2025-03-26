@@ -1,4 +1,8 @@
 import ContentstackLivePreview from "@contentstack/live-preview-utils";
+import { getContentstackEndpoints, getRegionForString } from "@timbenniks/contentstack-endpoints";
+
+const region = getRegionForString(process.env.NEXT_PUBLIC_CONTENTSTACK_REGION as string);
+const endpoints = getContentstackEndpoints(region, true)
 
 export function initLivePreview() {
   ContentstackLivePreview.init({
@@ -10,13 +14,11 @@ export function initLivePreview() {
       environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENVIRONMENT as string,
     },
     clientUrlParams: {
-      host:
-        process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === "EU"
-          ? "eu-app.contentstack.com"
-          : "app.contentstack.com",
+      host: endpoints.application,
     },
     editButton: {
       enable: true,
+      exclude: ["outsideLivePreviewPortal"]
     },
   });
 
