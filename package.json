@@ -1,14 +1,14 @@
 {
-  "name": "contentstack-implementation-guide-next-middleware",
-  "version": "0.0.9",
+  "name": "kickstart-next-middleware",
+  "version": "1.0.0",
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/timbenniks/contentstack-implementation-guide-next-middleware"
+    "url": "https://github.com/contentstack/kickstart-next-middleware"
   },
-  "description": "contentstack-implementation-guide-next-middleware",
-  "author": "Tim Benniks <tbenniks@gmail.com>",
-  "homepage": "https://timbenniks.dev",
+  "description": "Contentstack Kickstarts are the minimum amount of code needed to connect to Contentstack.",
+  "author": "Tim Benniks <tim.benniks@contentstack.com>",
+  "homepage": "https://contentstack.com",
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
